@@ -14,9 +14,14 @@ const initialFilms = [
 const [genre, setGenres] = useState("");
 const [filterdFilms, setfilterdFilms] = useState(initialFilms);
 
+// un if e un else molto semplice
 useEffect(() => {
-  console.log("ok");
-}, []);
+  if (genre === "") {
+    setfilterdFilms(initialFilms);
+  } else {
+    setfilterdFilms(initialFilms.filter((film) => film.genre === genre));
+  }
+}, [genre]); //esegui tutto questo solo quando genre cambia
 
 //Il filtro deve funzionare dinamicamente quando l'utente seleziona un genere dalla select.
 //Se non viene selezionato alcun genere, devono essere mostrati tutti i film.
@@ -26,7 +31,8 @@ function Main() {
     <div className="container">
       <div className="row">
         <div className="col-12">
-          <select>
+          <select value={genre} onChange={(e) => setGenres(e.target.value)}>
+            <option value="">seleziona il genere</option>
             {initialFilms.map((film) => {
               const { title, genre } = film;
               return (
@@ -37,11 +43,13 @@ function Main() {
             })}
           </select>
         </div>
-        {initialFilms.map((film) => {
+        {filterdFilms.map((film) => {
           const { title, genre } = film;
           return (
             <>
-              <div className="col-5">{title}</div>
+              <div className="col-5" key={title}>
+                {title}
+              </div>
             </>
           );
         })}
