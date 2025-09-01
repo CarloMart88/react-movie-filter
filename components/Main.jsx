@@ -11,22 +11,22 @@ const initialFilms = [
   { title: "Pulp Fiction", genre: "Thriller" },
 ];
 
-const [genre, setGenres] = useState("");
-const [filterdFilms, setfilterdFilms] = useState(initialFilms);
-
-// un if e un else molto semplice
-useEffect(() => {
-  if (genre === "") {
-    setfilterdFilms(initialFilms);
-  } else {
-    setfilterdFilms(initialFilms.filter((film) => film.genre === genre));
-  }
-}, [genre]); //esegui tutto questo solo quando genre cambia
-
 //Il filtro deve funzionare dinamicamente quando l'utente seleziona un genere dalla select.
 //Se non viene selezionato alcun genere, devono essere mostrati tutti i film.
 
 function Main() {
+  const [genre, setGenres] = useState("");
+  const [filterdFilms, setfilterdFilms] = useState(initialFilms);
+
+  // un if e un else molto semplice
+  useEffect(() => {
+    if (genre === "") {
+      setfilterdFilms(initialFilms);
+    } else {
+      setfilterdFilms(initialFilms.filter((film) => film.genre === genre));
+    }
+  }, [genre]); //esegui tutto questo solo quando genre cambia
+
   return (
     <div className="container">
       <div className="row">
@@ -48,7 +48,7 @@ function Main() {
           return (
             <>
               <div className="col-5" key={title}>
-                {title}
+                {film.title}
               </div>
             </>
           );
