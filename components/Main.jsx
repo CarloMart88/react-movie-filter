@@ -28,10 +28,10 @@ function Main() {
   }, [genre]); //esegui tutto questo solo quando genre cambia
 
   return (
-    <div className="container">
+    <div className="container bg-primary-subtle text-primary-emphasis m-2">
       <div className="row">
-        <div className="col-12">
-          <select value={genre} onChange={(e) => setGenres(e.target.value)}>
+        <div className="col-12 my-5 ">
+          <select onChange={(e) => setGenres(e.target.value)}>
             <option value="">seleziona il genere</option>
             {initialFilms.map((film) => {
               const { title, genre } = film;
@@ -43,16 +43,21 @@ function Main() {
             })}
           </select>
         </div>
-        {filterdFilms.map((film) => {
-          const { title, genre } = film;
-          return (
-            <>
-              <div className="col-5" key={title}>
-                {film.title}
-              </div>
-            </>
-          );
-        })}
+        <div className="row  justify-content-center ">
+          {filterdFilms.map((film) => {
+            const { title, genre } = film;
+            return (
+              <>
+                <div
+                  className="col-5 text-center m-2 bg-primary text-white "
+                  key={title}
+                >
+                  {title}
+                </div>
+              </>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
